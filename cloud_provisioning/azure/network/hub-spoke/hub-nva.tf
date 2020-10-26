@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "hub-nva-rg" {
   location = local.hub-nva-location
   name     = local.hub-nva-resource-group
 
-  tags {
+  tags =  {
     environment = local.prefix-hub-nva
   }
 }
@@ -26,7 +26,7 @@ resource "azurerm_network_interface" "hub-nva-nic" {
     private_ip_address            = "10.1.0.36"
   }
 
-  tags {
+  tags =  {
     environment = local.prefix-hub-nva
   }
 }
@@ -116,7 +116,7 @@ resource "azurerm_route_table" "hub-gateway-rt" {
     next_hop_in_ip_address = "10.0.0.36"
   }
 
-  tags {
+  tags =  {
     environment = local.prefix-hub-nva
   }
 }
@@ -146,7 +146,7 @@ resource "azurerm_route_table" "spoke1-rt" {
     next_hop_type  = "vnetlocal"
   }
 
-  tags {
+  tags =  {
     encironment = local.prefix-hub-nva
   }
 }

@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "hub-vnet" {
   name                = "${local.prefix-hub}-vnet"
   resource_group_name = azurerm_resource_group.hub-vnet-rg.name
 
-  tags {
+  tags = {
     environment = "hub-spoke"
   }
 }
@@ -53,7 +53,7 @@ resource "azurerm_network_interface" "hub-nic" {
     private_ip_address_allocation = "Dynamic"
   }
 
-  tags {
+  tags = {
     environment = local.prefix-hub
   }
 }

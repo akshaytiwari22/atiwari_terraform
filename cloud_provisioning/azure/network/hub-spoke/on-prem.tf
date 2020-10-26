@@ -15,7 +15,7 @@ resource "azurerm_virtual_network" "onprem-vnet" {
   name                = "onprem-vnet"
   resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
 
-  tags {
+  tags = {
     environment = local.prefix-onprem
   }
 }
@@ -40,7 +40,7 @@ resource "azurerm_public_ip" "onprem-pip" {
   resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
   allocation_method   = "Dynamic"
 
-  tags {
+  tags = {
     environment = local.prefix-onprem
   }
 }
@@ -75,7 +75,7 @@ resource "azurerm_network_security_group" "onprem-nsg" {
     destination_address_prefix = "*"
   }
 
-  tags {
+  tags = {
     environment = "onprem"
   }
 }
@@ -112,7 +112,7 @@ resource "azurerm_virtual_machine" "onprem-vm" {
     disable_password_authentication = false
   }
 
-  tags {
+  tags = {
     environment = local.prefix-onprem
   }
 }
