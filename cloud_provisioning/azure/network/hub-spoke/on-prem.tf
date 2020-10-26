@@ -45,6 +45,27 @@ resource "azurerm_public_ip" "onprem-pip" {
   }
 }
 
+resource "azurerm_subnet" "onprem-bastion" {
+  address_prefix       = "192.168.5.0/27"
+  name                 = "bastion"
+  resource_group_name  = azurerm_resource_group.onprem-vnet-rg.name
+  virtual_network_name = azurerm_virtual_network.onprem-vnet.name
+}
+
+resource "azurerm_public_ip" "opbastion-pip" {
+  name                = "opbastionpip"
+  location            = azurerm_resource_group.onprem-vnet-rg.location
+  resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_bastion_host" "onprem-vnet-bastion" {
+  name                = "${local.prefix-onprem}-bastion}"
+  location            = azurerm_resource_group.onprem-vnet-rg.location
+  resource_group_name = azurerm_resource_group.onprem-vnet-rg.name
+}
+
 resource "azurerm_network_interface" "onprem-inc" {
   location            = azurerm_resource_group.onprem-vnet-rg.location
   name                = "${local.prefix-onprem}-nic"

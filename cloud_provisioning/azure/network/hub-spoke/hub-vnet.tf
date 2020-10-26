@@ -42,6 +42,28 @@ resource "azurerm_subnet" "hub-dmz" {
   virtual_network_name = azurerm_virtual_network.hub-vnet.name
 }
 
+resource "azurerm_subnet" "hub-bastion" {
+  address_prefix       = "10.0.5.0/27"
+  name                 = "bastion"
+  resource_group_name  = azurerm_resource_group.hub-vnet-rg.name
+  virtual_network_name = azurerm_virtual_network.hub-vnet.name
+}
+
+resource "azurerm_public_ip" "bastion-pip" {
+  name                = "bastionpip"
+  location            = azurerm_resource_group.hub-vnet-rg.location
+  resource_group_name = azurerm_resource_group.hub-vnet-rg.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_bastion_host" "hub-vnet-bastion" {
+  name                = "${local.prefix-hub}-bastion}"
+  location            = azurerm_resource_group.hub-vnet-rg.location
+  resource_group_name = azurerm_resource_group.hub-vnet-rg.name
+}
+
+
 resource "azurerm_network_interface" "hub-nic" {
   location             = azurerm_resource_group.hub-vnet-rg.location
   name                 = "${local.prefix-hub}-nic"
