@@ -15,8 +15,8 @@ resource "azurerm_network_watcher" "nsg-watcher" {
   resource_group_name = azurerm_resource_group.nsg-rg.name
 }
 
-resource "azurerm_storage_account" "nsg-storage-account" {
-  name                = "${local.prefix-nsg}-storage-account}"
+resource "azurerm_storage_account" "nsg-sa" {
+  name                = "${local.prefix-nsg}-sa}"
   resource_group_name = azurerm_resource_group.nsg-rg.name
   location            = azurerm_resource_group.nsg-rg.location
 
@@ -38,7 +38,7 @@ resource "azurerm_network_watcher_flow_log" "nsg-wfl" {
   resource_group_name  = azurerm_resource_group.nsg-rg.name
 
   network_security_group_id = azurerm_network_security_group.onprem-nsg.id
-  storage_account_id        = azurerm_storage_account.nsg-storage-account.id
+  storage_account_id        = azurerm_storage_account.nsg-sa.id
   enabled                   = true
 
 }
