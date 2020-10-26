@@ -1,6 +1,6 @@
 variable "location" {
   description = "Location of the network"
-  default     = westus2
+  default     = "westus2"
 }
 
 variable "username" {
