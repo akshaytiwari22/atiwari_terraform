@@ -40,5 +40,5 @@ resource "azurerm_network_watcher_flow_log" "nsg-wfl" {
   network_security_group_id = azurerm_network_security_group.onprem-nsg.id
   storage_account_id        = azurerm_storage_account.nsg-storage-account.id
   enabled                   = true
-  
+
 }
